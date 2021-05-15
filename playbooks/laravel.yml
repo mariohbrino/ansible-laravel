@@ -12,5 +12,6 @@
     - { role: supervisor,   tags: supervisor  }
     - { role: sublime,      tags: sublime     }
     - { role: zsh,          tags: zsh         }
+    - { role: terminal,     tags: terminal    }
     - { role: laravel,      tags: laravel     }
     - { role: valet,        tags: valet       }
