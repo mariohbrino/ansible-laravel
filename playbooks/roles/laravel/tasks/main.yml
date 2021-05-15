@@ -1,0 +1,5 @@
+---
+- name: Add laravel to global composer
+  become: yes
+  become_user: "{{ username }}"
+  command: "composer global require laravel/installer"

@@ -1,0 +1,19 @@
+---
+- name: Install php fpm
+  apt: pkg=php-fpm state=present force=yes
+
+- name: Install php dependencies
+  apt:
+    pkg:
+      - php
+      - php-mysql
+      - php-curl
+      - php-gd
+      - php-intl
+      - php-mbstring
+      - php-soap
+      - php-xml
+      - php-xmlrpc
+      - php-zip
+    state: present
+    force: yes

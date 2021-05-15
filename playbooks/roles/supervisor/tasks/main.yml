@@ -1,0 +1,7 @@
+---
+- name: Install supervisor
+  apt: 
+    pkg:
+      - supervisor 
+    state: present 
+    force: yes

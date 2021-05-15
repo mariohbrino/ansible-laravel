@@ -1,0 +1,25 @@
+---
+- name: Install composer
+  get_url: 
+    url: https://getcomposer.org/installer
+    dest: /tmp/composer-setup.php
+    checksum: "sha384:756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3"
+
+- name: Setup composer
+  shell: "php /tmp/composer-setup.php --install-dir=/usr/local/bin"
+
+- name: Rename composer.phar to composer
+  shell: mv /usr/local/bin/composer.phar /usr/local/bin/composer
+
+- name: Add composer to path
+  copy: 
+    src: files/.profile
+    dest: /home/{{ username }}/.profile
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+
+- name: Remove composer-setup.phar
+  file: 
+    dest: /tmp/composer-setup.php
+    state: absent

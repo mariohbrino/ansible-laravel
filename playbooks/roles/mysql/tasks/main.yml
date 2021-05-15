@@ -1,0 +1,17 @@
+---
+- name: Install mysql-server
+  apt:
+    pkg:
+      - mysql-server
+    state: present
+    force: yes
+    update_cache: yes
+
+- name: Add configuration
+  template:
+    src: files/my.cnf
+    dest: /etc/mysql/conf.d
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart mysql

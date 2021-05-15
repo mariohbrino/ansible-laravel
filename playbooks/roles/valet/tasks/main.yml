@@ -1,0 +1,10 @@
+---
+- name: Add valet to global composer
+  become: yes
+  become_user: "{{ username }}"
+  command: "composer global require cpriego/valet-linux"
+
+- name: Install valet
+  become: yes
+  become_user: "{{ username }}"
+  command: valet install

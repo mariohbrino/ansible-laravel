@@ -1,0 +1,16 @@
+---
+- name: Install common dependencies
+  apt:
+    pkg:
+      - git
+      - curl
+      - wget
+      - zip
+      - unzip
+      - net-tools
+      - network-manager
+      - libnss3-tools
+      - jq
+      - xsel
+    state: present
+    force: yes

@@ -1,0 +1,39 @@
+---
+- name: Install zsh and dependencies
+  apt:
+    pkg:
+      - zsh
+      - fonts-powerline
+    state: present
+    force: yes
+
+- name: Download zsh installer
+  get_url: 
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/zsh-installer.sh
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Check that .oh-my-zsh is installed
+  stat:
+    path: /home/{{ username }}/.oh-my-zsh
+  register: ohmyzsh_installed
+
+- name: Execute the zsh-installer.sh
+  become: yes
+  become_user: "{{ username }}"
+  shell: sh /tmp/zsh-installer.sh
+  when: ohmyzsh_installed.stat.exists == False
+
+- name: Remove the zsh-installer.sh
+  become: yes
+  become_user: "{{ username }}"
+  file: path=/tmp/zsh-installer.sh state=absent
+
+- name: Add .zshrc config file to your user path
+  copy:
+    src: files/.zshrc
+    dest: /home/{{ username }}
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
