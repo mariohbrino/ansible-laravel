@@ -11,6 +11,7 @@
     - { role: redis,        tags: redis       }
     - { role: supervisor,   tags: supervisor  }
     - { role: sublime,      tags: sublime     }
+    - { role: vscode,       tags: vscode      }
     - { role: zsh,          tags: zsh         }
     - { role: terminal,     tags: terminal    }
     - { role: laravel,      tags: laravel     }
