@@ -1,6 +1,6 @@
 # Laravel localhost development for Ubuntu 20.04
 
-Laravel localhost development for Ubuntu allow you to install a variety of applications and dependencies that you may necessary to start Laravel development
+Laravel localhost development for Ubuntu is an ansible playbook that allows you to install a variety of applications and dependencies that you may need to start development with Laravel
 
 ### Dependencies
 
@@ -21,6 +21,7 @@ Laravel localhost development for Ubuntu allow you to install a variety of appli
 * redis
 * supervisor
 * zsh
+* oh-my-zsh
 
 ### Applications
 
@@ -54,11 +55,23 @@ sudo mysql_secure_installation
 # remaining yes
 ```
 
-Create new database and credentials
+### Tags
+
+Using tags helps to define which roles will be selected or skipped
+
+Run only tags with tags `terminal` and `zsh`
 ```bash
-sudo mysql;
-CREATE DATABASE laravel DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-CREATE USER 'laravel'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
-GRANT ALL ON laravel.* TO 'laravel'@'localhost';
-FLUSH PRIVILEGES;
+ansible-playbook -i inventory/laravel.yml playbooks/laravel.yml -K --tags "terminal,zsh"
 ```
+
+Run all tasks except those with the tags `valet` and `supervisor`
+```bash
+ansible-playbook -i inventory/laravel.yml playbooks/laravel.yml -K --skip-tags "valet,supervisor"
+```
+
+### Aliases
+You may use the aliases `www`, `phpunit`, and `artisan`
+
+* www - `cd ~/www`
+* phpunit - `php ./vendor/phpunit/phpunit/phpunit`
+* artisan - `php artisan`
