@@ -1,5 +1,5 @@
 ---
-- name: Install mysql-server
+- name: Install mysql server
   apt:
     pkg:
       - mysql-server
@@ -7,7 +7,7 @@
     force: yes
     update_cache: yes
 
-- name: Add configuration
+- name: Add my.cnf configuration
   template:
     src: files/my.cnf
     dest: /etc/mysql/conf.d

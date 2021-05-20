@@ -1,5 +1,11 @@
 ---
+- name: Check that laravel is installed
+  stat:
+    path: /home/{{ username }}/.config/composer/vendor/bin/laravel
+  register: laravel_installed
+
 - name: Add laravel to global composer
   become: yes
   become_user: "{{ username }}"
-  command: "composer global require laravel/installer"
+  command: "/usr/local/bin/composer global require laravel/installer"
+  when: laravel_installed.stat.exists == False

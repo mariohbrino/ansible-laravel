@@ -1,5 +1,5 @@
 ---
-- name: Copy terminal settings
+- name: Copy backup of terminal settings
   copy: 
     src: files/gnome_terminal_settings_backup.txt
     dest: /tmp/gnome_terminal_settings_backup.txt
@@ -7,12 +7,12 @@
     group: "{{ username }}"
     mode: 0644
 
-- name: Set up terminal settings
+- name: Recovery backup of terminal settings
   become: yes
   become_user: "{{ username }}"
   shell: "dconf load /org/gnome/terminal/ < /tmp/gnome_terminal_settings_backup.txt"
 
-- name: Remove gnome_terminal_settings_backup.txt
+- name: Remove backup of terminal settings
   file: 
     dest: /tmp/gnome_terminal_settings_backup.txt
     state: absent

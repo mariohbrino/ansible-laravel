@@ -14,5 +14,11 @@
     pkg: nodejs
     state: present
 
+- name: Check that yarn is installed
+  stat:
+    path: /usr/bin/yarn
+  register: yarn_installed
+
 - name: Install yarn
-  command: npm install -g yarn
+  command: "npm install -g yarn"
+  when: yarn_installed.stat.exists == False

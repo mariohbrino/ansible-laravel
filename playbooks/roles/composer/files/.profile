@@ -26,4 +26,8 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+alias www="cd ~/www"
+alias phpunit="php ./vendor/phpunit/phpunit/phpunit"
+
+export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"

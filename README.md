@@ -1,6 +1,6 @@
-# Laravel localhost development for Ubuntu 20.04
+# Laravel local development for Ubuntu 20.04
 
-Laravel localhost development for Ubuntu is an ansible playbook that allows you to install a variety of applications and dependencies that you may need to start development with Laravel
+Laravel local development for Ubuntu is an ansible playbook that allows you to install a variety of applications and dependencies that you may need to start development with Laravel
 
 ### Dependencies
 
@@ -43,9 +43,14 @@ sudo apt -y install ansible
 
 ## Usage and information
 
-Install lemp server in your local ubuntu server 20.04
+Install laravel in your local ubuntu desktop 20.04
 ```bash
 ansible-playbook -i inventory/laravel.yml playbooks/laravel.yml -K
+```
+
+Change to `zsh` shell
+```bash
+chsh -s /usr/bin/zsh && gnome-session-quit --no-prompt
 ```
 
 MySQL Server Secury installation
@@ -71,6 +76,11 @@ ansible-playbook -i inventory/laravel.yml playbooks/laravel.yml -K --skip-tags "
 
 ### Aliases
 You may use the aliases `www`, `phpunit`, and `artisan`
+
+Create `www` folder in your home profile
+```bash
+mkdir ~/www
+```
 
 * www - `cd ~/www`
 * phpunit - `php ./vendor/phpunit/phpunit/phpunit`
