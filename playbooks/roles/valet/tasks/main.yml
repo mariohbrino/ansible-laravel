@@ -13,5 +13,5 @@
 - name: Install valet
   become: yes
   become_user: "{{ username }}"
-  command: "/usr/local/bin/valet install"
+  command: "/home/{{ username }}/.config/composer/vendor/bin/valet install"
   when: valet_installed.stat.exists == False
