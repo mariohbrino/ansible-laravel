@@ -27,6 +27,7 @@ Laravel local development for Ubuntu is an ansible playbook that allows you to i
 
 * sublime-text
 * sublime-merge
+* vscode
 
 ## Initial settings
 
