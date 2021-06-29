@@ -1,0 +1,17 @@
+---
+- name: Install key for tableplus
+  apt_key:
+    url: https://deb.tableplus.com/apt.tableplus.com.gpg.key
+    state: present
+
+- name: Add tableplus repo
+  apt_repository:
+    repo: deb [arch=amd64] https://deb.tableplus.com/debian tableplus main
+    update_cache: yes
+
+- name: Install tableplus tableplus
+  apt:
+    pkg:
+      - tableplus
+    state: present
+    force: yes

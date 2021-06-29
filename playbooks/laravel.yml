@@ -12,6 +12,7 @@
     - { role: supervisor,   tags: supervisor  }
     - { role: sublime,      tags: sublime     }
     - { role: vscode,       tags: vscode      }
+    - { role: tableplus,    tags: tableplus   }
     - { role: zsh,          tags: zsh         }
     - { role: terminal,     tags: terminal    }
     - { role: laravel,      tags: laravel     }
