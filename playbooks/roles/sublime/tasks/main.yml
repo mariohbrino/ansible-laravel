@@ -16,3 +16,11 @@
       - sublime-merge
     state: present
     force: yes
+
+- name: Add custom settings to sublime text
+  copy:
+    src: files/Preferences.sublime-settings
+    dest: /home/{{ username }}/.config/sublime-text/Packages/User
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
