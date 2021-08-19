@@ -1,0 +1,4 @@
+[
+    { "keys": ["ctrl+k", "ctrl+i"], "command": "title_case" },
+    { "keys": ["shift+ctrl+'"], "command": "emmet_rename_tag" },
+]

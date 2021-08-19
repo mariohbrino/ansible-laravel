@@ -10,5 +10,6 @@
     "ensure_newline_at_eof_on_save": true,
     "save_on_focus_lost": true,
     "close_windows_when_empty": true,
-    "word_wrap": false
+    "word_wrap": false,
+    "theme": "Adaptive.sublime-theme",
 }

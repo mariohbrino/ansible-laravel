@@ -24,3 +24,11 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0644
+
+- name: Add custom keymap to sublime text
+  copy:
+    src: files/Default (Linux).sublime-keymap
+    dest: /home/{{ username }}/.config/sublime-text/Packages/User
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
