@@ -86,3 +86,19 @@ mkdir ~/www
 * www - `cd ~/www`
 * phpunit - `php ./vendor/phpunit/phpunit/phpunit`
 * artisan - `php artisan`
+
+### Timezone on dual boot
+
+Linux assumes that the time is stored in UTC and Windows uses the local timezone, because the timezone is stored in the BIOS settings happens that when the computer boots on windows or linux it messes up the timezone settings
+
+Enable local RTC
+```bash
+timedatectl set-local-rtc 1 --adjust-system-clock
+```
+
+Check current settings
+```bash
+timedatectl
+```
+
+> If RTC is enable it's setup
