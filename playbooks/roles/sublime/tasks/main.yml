@@ -17,6 +17,13 @@
     state: present
     force: yes
 
+- name: Ensures sublime packages directory exists
+  file:
+    path: /home/{{ username }}/.config/sublime-text/Packages/User
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: directory
+
 - name: Add custom settings to sublime text
   copy:
     src: files/Preferences.sublime-settings
