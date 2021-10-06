@@ -9,3 +9,10 @@
   become_user: "{{ username }}"
   command: "/usr/local/bin/composer global require laravel/installer"
   when: laravel_installed.stat.exists == False
+
+- name: Ensures www directory exists
+  file:
+    path: "/home/{{ username }}/www"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: directory
