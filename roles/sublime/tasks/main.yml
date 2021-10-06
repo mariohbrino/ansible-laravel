@@ -19,7 +19,7 @@
 
 - name: "Ensures sublime-text directory exists"
   file:
-    path: /home/{{ username }}/.config/sublime-text/Packages
+    path: /home/{{ username }}/.config/sublime-text/Packages/User
     owner: "{{ username }}"
     group: "{{ username }}"
     state: directory
