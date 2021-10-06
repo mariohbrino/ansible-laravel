@@ -31,7 +31,7 @@ Laravel local development for Ubuntu is an ansible playbook that allows you to i
 
 ## Initial settings
 
-Change username on `inventory/laravel.yml` vars with your username
+Change username on `inventory.yml` vars with your username
 ```bash
 username: 'ubuntu'
 ```
@@ -45,7 +45,7 @@ sudo apt -y install ansible
 
 Install laravel in your local ubuntu desktop 20.04
 ```bash
-ansible-playbook -i inventory/laravel.yml playbooks/laravel.yml
+ansible-playbook -i inventory.yml laravel.yml
 ```
 > Add flag `-K` in case user has credentials
 
@@ -60,12 +60,12 @@ Using tags helps to define which roles will be selected or skipped
 
 Run only tags with tags `terminal` and `zsh`
 ```bash
-ansible-playbook -i inventory/laravel.yml playbooks/laravel.yml --tags "terminal,zsh"
+ansible-playbook -i inventory.yml laravel.yml --tags "terminal,zsh"
 ```
 
 Run all tasks except those with the tags `valet` and `supervisor`
 ```bash
-ansible-playbook -i inventory/laravel.yml playbooks/laravel.yml --skip-tags "valet,supervisor"
+ansible-playbook -i inventory.yml laravel.yml --skip-tags "valet,supervisor"
 ```
 
 ### Aliases
