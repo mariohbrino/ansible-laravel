@@ -49,9 +49,9 @@ ansible-playbook -i inventory.yml laravel.yml
 ```
 > Add flag `-K` in case user has credentials
 
-Change to `zsh` shell
+Logoff to shell complete the change to `zsh` shell
 ```bash
-chsh -s /usr/bin/zsh && gnome-session-quit --no-prompt
+gnome-session-quit --no-prompt
 ```
 
 ### Tags

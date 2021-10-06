@@ -40,3 +40,6 @@
     group: "{{ username }}"
     mode: 0644
   when: ohmyzsh_installed.stat.exists == False
+
+- name: "Change shell to zsh"
+  shell: "chsh -s /usr/bin/zsh {{ username }}"
