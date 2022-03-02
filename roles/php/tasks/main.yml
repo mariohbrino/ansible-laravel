@@ -1,23 +1,29 @@
 ---
-- name: "Install php fpm"
+- name: "Add php ondrej apt repository"
+  apt_repository:
+    repo: "ppa:ondrej/php"
+    state: present
+    update_cache: yes
+
+- name: "Install php"
   apt:
     pkg:
-      - php-fpm
+      php8.0-fpm
     state: present
     force: yes
 
 - name: "Install php dependencies"
   apt:
     pkg:
-      - php
-      - php-mysql
-      - php-curl
-      - php-gd
-      - php-intl
-      - php-mbstring
-      - php-soap
-      - php-xml
-      - php-xmlrpc
-      - php-zip
+      - php8.0
+      - php8.0-mysql
+      - php8.0-curl
+      - php8.0-gd
+      - php8.0-intl
+      - php8.0-mbstring
+      - php8.0-soap
+      - php8.0-xml
+      - php8.0-xmlrpc
+      - php8.0-zip
     state: present
     force: yes
