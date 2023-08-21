@@ -71,7 +71,7 @@ POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL=''
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='%F{blue}$%f '
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon root_indicator ssh dir dir_writable vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vi_mode status command_execution_time background_jobs time ram)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vi_mode status virtualenv command_execution_time background_jobs time ram)
 ############# END- POWERLEVEL THEME SETTINGS ##############
 
 # Set list of themes to pick from when loading at random
@@ -134,7 +134,7 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vi_mode status command_execution_time backgr
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git virtualenv)
 
 source $ZSH/oh-my-zsh.sh
 
