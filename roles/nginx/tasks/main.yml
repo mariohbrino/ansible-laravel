@@ -1,5 +1,6 @@
 ---
-- name: "Install nginx"
+- name: Install nginx
+  become: yes
   apt: 
     pkg:
       - nginx
@@ -7,12 +8,13 @@
     force: yes
     update_cache: yes
 
-- name: "Disable default config"
+- name: Disable default config
   file: 
     dest: /etc/nginx/sites-enabled/default
     state: absent
 
-- name: "Restart and enable nginx"
+- name: Restart and enable nginx
+  become: yes
   service:
     name: nginx
     state: restarted

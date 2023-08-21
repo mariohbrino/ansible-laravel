@@ -1,5 +1,6 @@
 ---
-- name: "Install supervisor"
+- name: Install supervisor
+  become: yes
   apt: 
     pkg:
       - supervisor 

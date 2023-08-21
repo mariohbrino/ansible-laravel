@@ -1,5 +1,6 @@
 ---
-- name: "Install mysql server"
+- name: Install mysql server
+  become: yes
   apt:
     pkg:
       - mysql-server
@@ -7,7 +8,7 @@
     force: yes
     update_cache: yes
 
-- name: "Add my.cnf configuration"
+- name: Add my.cnf configuration
   template:
     src: files/my.cnf
     dest: /etc/mysql/conf.d
@@ -15,7 +16,8 @@
     group: root
     mode: 0644
 
-- name: "Restart and enable mysql"
+- name: Restart and enable mysql
+  become: yes
   service:
     name: mysql
     state: restarted

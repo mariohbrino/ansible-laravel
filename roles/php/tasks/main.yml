@@ -1,18 +1,22 @@
 ---
-- name: "Add php ondrej apt repository"
+- name: Add php ondrej apt repository
+  become: yes
   apt_repository:
-    repo: "ppa:ondrej/php"
+    repo: ppa:ondrej/php
     state: present
     update_cache: yes
 
-- name: "Install php"
+- name: Install php
+  become: yes
   apt:
     pkg:
       php8.0-fpm
     state: present
     force: yes
+    update_cache: yes
 
-- name: "Install php dependencies"
+- name: Install php dependencies
+  become: yes
   apt:
     pkg:
       - php8.0
@@ -27,3 +31,4 @@
       - php8.0-zip
     state: present
     force: yes
+    update_cache: yes

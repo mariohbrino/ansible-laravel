@@ -1,18 +1,18 @@
 ---
-- name: "Check that laravel is installed"
+- name: Check that laravel is installed
   stat:
     path: /home/{{ username }}/.config/composer/vendor/bin/laravel
   register: laravel_installed
 
-- name: "Add laravel to global composer"
+- name: Add laravel to global composer
   become: yes
   become_user: "{{ username }}"
-  command: "/usr/local/bin/composer global require laravel/installer"
+  command: /usr/local/bin/composer global require laravel/installer
   when: laravel_installed.stat.exists == False
 
-- name: "Ensures www directory exists"
+- name: Ensures www directory exists
   file:
-    path: "/home/{{ username }}/www"
+    path: /home/{{ username }}/www
     owner: "{{ username }}"
     group: "{{ username }}"
     state: directory

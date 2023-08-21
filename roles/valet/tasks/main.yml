@@ -1,17 +1,17 @@
 ---
-- name: "Check that valet is installed"
+- name: Check that valet is installed
   stat:
     path: /home/{{ username }}/.config/composer/vendor/bin/valet
   register: valet_installed
 
-- name: "Add valet to global composer"
+- name: Add valet to global composer
   become: yes
   become_user: "{{ username }}"
-  command: "/usr/local/bin/composer global require cpriego/valet-linux"
+  command: /usr/local/bin/composer global require cpriego/valet-linux
   when: valet_installed.stat.exists == False
 
-- name: "Install valet"
+- name: Install valet
   become: yes
   become_user: "{{ username }}"
-  shell: "/home/{{ username }}/.config/composer/vendor/bin/valet install"
+  shell: /home/{{ username }}/.config/composer/vendor/bin/valet install
   when: valet_installed.stat.exists == False and ansible_connection == 'local'
