@@ -58,6 +58,22 @@ ansible-playbook -i inventory.yml laravel.yml -K
 gnome-session-quit --no-prompt
 ```
 
+> When running on WSL you should skip tags with flag --skip-tags "terminal,vscode,valet,sublime".
+
+### Configure VSCode
+
+1. Open settings on vscode (ctrl+,), the add MesloLGS NF to the `editor font family` list and save.
+2. Open settings on vscode (ctrl+,), the search for `terminal integrated font family` and change to MesloLGS NF and save.
+
+When using with WSL.
+
+1. Install the plugin WSL for vscode.
+2. Open windows explorer and install all fonts from roles > fonts > files and save.
+3. Open settings on vscode (ctrl+,), then add MesloLGS NF to the `editor font family` list and save.
+4. Open settings on vscode (ctrl+,), then search for `terminal integrated font family` and change to MesloLGS NF and save.
+5. Open settings on terminal (ctrol+,), then select appearance and change font face to MesloLGS NF and save.
+6. Open settings on terminal (ctrol+,), then select Open JSON file and copy the settings from `schema.conf` under schema and save.
+
 ### Tags
 
 Using tags helps to define which roles will be selected or skipped.
