@@ -3,6 +3,7 @@
   hosts: localhost
   roles:
     - { role: common,       tags: common      }
+    - { role: fonts,        tags: fonts       }
     - { role: php,          tags: php         }
     - { role: composer,     tags: composer    }
     - { role: nginx,        tags: nginx       }
