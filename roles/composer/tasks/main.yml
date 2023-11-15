@@ -6,23 +6,14 @@
 
 - name: Download composer
   get_url: 
-    url: https://getcomposer.org/installer
-    dest: /tmp/composer-setup.php
-    checksum: sha384:{{ composer.verification_key }}
+    url: "{{ composer_url }}"
+    checksum: sha256:{{ composer_url }}.sha256sum
+    dest: /tmp/composer.phar
+    mode: 0755
   when: composer_installed.stat.exists == False
 
 - name: Install composer
-  shell: php /tmp/composer-setup.php --install-dir=/usr/local/bin
-  when: composer_installed.stat.exists == False
-
-- name: Rename composer.phar to composer
-  shell: mv /usr/local/bin/composer.phar /usr/local/bin/composer
-  when: composer_installed.stat.exists == False
-
-- name: Remove composer-setup.phar
-  file: 
-    dest: /tmp/composer-setup.php
-    state: absent
+  shell: mv /tmp/composer.phar /usr/local/bin/composer
   when: composer_installed.stat.exists == False
 
 - name: Replace .profile file

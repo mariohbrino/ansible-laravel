@@ -11,5 +11,4 @@ all:
     ansible_ssh_pipelining: true
     ansible_ssh_private_key_file: path/to/your/ssh-key
     ansible_python_interpreter: /usr/bin/python3
-    composer:
-      verification_key: 55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae
+    composer_url: https://getcomposer.org/download/latest-stable/composer.phar
