@@ -6,7 +6,7 @@ all:
     username: <username>
     ansible_user: "{{ username }}"
     ansible_become: yes
-    ansible_connection: ssh
-    ansible_become_method: local
+    ansible_connection: local
+    ansible_become_method: sudo
     ansible_python_interpreter: /usr/bin/python3
     composer_url: https://getcomposer.org/download/latest-stable/composer.phar
