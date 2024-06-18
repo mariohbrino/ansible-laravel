@@ -1,0 +1,31 @@
+---
+- name: Add nodejs apt key
+  become: yes
+  apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    keyring: /etc/apt/trusted.gpg.d/nodejs.gpg
+    state: present
+
+- name: Add nodejs ppa
+  become: yes
+  apt_repository:
+    repo: deb https://deb.nodesource.com/node_20.x focal main
+    update_cache: yes
+
+- name: Install nodejs
+  become: yes
+  apt: 
+    pkg: nodejs
+    state: present
+    update_cache: yes
+
+- name: Check that yarn is installed
+  stat:
+    path: /usr/bin/yarn
+  register: yarn_installed
+
+- name: Install yarn
+  become: no
+  become_user: "{{ ansible_user }}"
+  command: npm install -g yarn
+  when: yarn_installed.stat.exists == False

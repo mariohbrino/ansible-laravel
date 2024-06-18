@@ -1,7 +1,0 @@
----
-- name: Install redis server
-  apt: 
-    pkg:
-      - redis-server 
-    state: present 
-    force: yes

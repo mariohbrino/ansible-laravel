@@ -1,0 +1,18 @@
+---
+- name: Check that laravel is installed
+  stat:
+    path: /home/{{ ansible_user }}/.config/composer/vendor/bin/laravel
+  register: laravel_installed
+
+- name: Add laravel to global composer
+  become: no
+  become_user: "{{ ansible_user }}"
+  command: /usr/local/bin/composer global require laravel/installer
+  when: laravel_installed.stat.exists == False
+
+- name: Ensures www directory exists
+  file:
+    path: /home/{{ ansible_user }}/www
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: directory

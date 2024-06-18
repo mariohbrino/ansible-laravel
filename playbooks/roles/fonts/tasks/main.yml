@@ -1,0 +1,23 @@
+---
+- name: Create fonts direcitoy
+  become: yes
+  file:
+    path: /home/{{ ansible_user }}/.fonts/
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0774
+    state: directory
+
+- name: Copy fonts to system
+  become: yes
+  copy:
+    src: "files/{{ item }}"
+    dest: "/home/{{ ansible_user }}/.fonts/"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0664
+  loop:
+    - "MesloLGS NF Regular.ttf"
+    - "MesloLGS NF Bold.ttf"
+    - "MesloLGS NF Italic.ttf"
+    - "MesloLGS NF Bold Italic.ttf"

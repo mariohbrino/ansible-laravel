@@ -1,0 +1,15 @@
+---
+- name: Deploy lemp server for laravel
+  hosts: laravel
+  vars:
+    ansible_user: vagrant
+  roles:
+    - { role: common,       tags: common      }
+    - { role: php,          tags: php         }
+    - { role: composer,     tags: composer    }
+    - { role: nginx,        tags: nginx       }
+    - { role: nodejs,       tags: nodejs      }
+    - { role: mysql,        tags: mysql       }
+    - { role: redis,        tags: redis       }
+    - { role: supervisor,   tags: supervisor  }
+    - { role: laravel,      tags: laravel     }
