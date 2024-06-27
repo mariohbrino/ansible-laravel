@@ -30,9 +30,8 @@
     state: directory
 
 - name: Change npm's default directory
-  become: yes
-  shell: |
-    npm config set prefix '/home/{{ ansible_user }}/.npm'
+  become_user: "{{ ansible_user }}"
+  shell: npm config set prefix ~/.npm
 
 - name: Append npm path to environment variables
   lineinfile:
