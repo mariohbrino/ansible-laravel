@@ -19,13 +19,17 @@
     state: present
     update_cache: yes
 
-- name: Check that yarn is installed
-  stat:
-    path: /usr/bin/yarn
-  register: yarn_installed
+- name: Create npm's directory
+  become: yes
+  file:
+    path: "/home/{{ ansible_user }}/.npm"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0774
+    state: directory
 
-- name: Install yarn
-  become: no
-  become_user: "{{ ansible_user }}"
-  command: npm install -g yarn
-  when: yarn_installed.stat.exists == False
+- name: Change npm's default directory
+  become: yes
+  shell: |
+    npm config set prefix '~/.npm'
+    echo export PATH=~/.npm/bin:$PATH > ~/.profile

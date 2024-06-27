@@ -8,6 +8,7 @@
     - { role: composer,     tags: composer    }
     - { role: nginx,        tags: nginx       }
     - { role: nodejs,       tags: nodejs      }
+    - { role: yarn,         tags: yarn        }
     - { role: mysql,        tags: mysql       }
     - { role: redis,        tags: redis       }
     - { role: supervisor,   tags: supervisor  }

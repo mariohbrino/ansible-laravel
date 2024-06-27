@@ -1,0 +1,11 @@
+---
+- name: Check that yarn is installed
+  stat:
+    path: /usr/bin/yarn
+  register: yarn_installed
+
+- name: Install yarn
+  become_user: "{{ ansible_user }}"
+  become: no
+  command: npm install -g yarn
+  when: yarn_installed.stat.exists == False
