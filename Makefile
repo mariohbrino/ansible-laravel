@@ -10,6 +10,9 @@ basic: # Basic setup of laravel development. [Initial setup and Ubuntu/Debian Ba
 	@ansible-playbook -i playbooks/inventory.yml playbooks/basic.yml --extra-vars ansible_user=$$(id -nu) -K
 	@gnome-session-quit --no-prompt
 
+wsl: # Setup of laravel development on WSL. [Initial setup and Ubuntu/Debian Based]
+	@ansible-playbook -i playbooks/inventory.yml playbooks/wsl.yml --extra-vars ansible_user=$$(id -nu) -K
+
 setup: # Setup of laravel development. [Initial setup and Ubuntu/Debian Based]
 	@ansible-playbook -i playbooks/inventory.yml playbooks/setup.yml --extra-vars ansible_user=$$(id -nu) -K
 	@gnome-session-quit --no-prompt

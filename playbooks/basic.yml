@@ -1,5 +1,5 @@
 ---
-- name: Deploy lemp server for laravel
+- name: Provision laravel development
   hosts: localhost
   roles:
     - { role: common,       tags: common      }

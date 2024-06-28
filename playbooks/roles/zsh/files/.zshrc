@@ -183,3 +183,4 @@ artisan() {
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
+export PATH="~/.npm/bin:$PATH"

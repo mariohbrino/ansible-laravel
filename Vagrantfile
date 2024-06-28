@@ -6,7 +6,7 @@ Vagrant.configure('2') do |config|
 
     node.vm.network 'public_network',
       ip: '10.25.10.99',
-      bridge: 'eno1',
+      bridge: ['eno1'],
       gateway: '10.25.10.1',
       netmask: '255.255.255.0'
 
