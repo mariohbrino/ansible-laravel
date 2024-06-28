@@ -3,6 +3,7 @@
   hosts: laravel
   vars:
     ansible_user: vagrant
+    ansible_python_interpreter: /usr/bin/python3.10
   roles:
     - { role: common,       tags: common      }
     - { role: php,          tags: php         }
