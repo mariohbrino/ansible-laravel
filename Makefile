@@ -17,6 +17,12 @@ setup: # Setup of laravel development. [Initial setup and Ubuntu/Debian Based]
 	@ansible-playbook -i playbooks/inventory.yml playbooks/setup.yml --extra-vars ansible_user=$$(id -nu) -K
 	@gnome-session-quit --no-prompt
 
+settings: # Copy vagrant environment variables template.
+	@cp .env.example .env
+
+install: # Install vagrant plugins.
+	@vagrant plugin install vagrant-env
+
 up: # Create vagrant ubuntu virtual machine for testing.
 	@vagrant up
 

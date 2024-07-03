@@ -4,17 +4,32 @@ Ansible Playbook for Laravel on Ubuntu to install a couple applications and depe
 
 ## Initial settings
 
-Install ansible and make in your system, then run the make command to set up the machine.
+Install `ansible` and `make` in your system.
 ```bash
-sudo apt -y install ansible make    # install necessary dependencies.
+sudo apt -y install ansible make
+```
+
+Then run the make command to set up the machine.
+```bash
 make [setup | basic | wsl]          # Provision laravel development environemnt.
+```
+
+### Vagrant settings
+
+Install `vagrant` and `virtualbox` in your system.
+```bash
+sudo apt -y install vagrant virtualbox
+```
+
+To configure a ubuntu virtual machine with vagrant use the commands below.
+```bash
+make settings                       # Copy vagrant environment variables template.
+make install                        # Install vagrant plugins.
 make up                             # Create vagrant ubuntu virtual machine for testing.
 make provision                      # Provision vagrant ubuntu virtual machine.
 make ssh                            # SSH into vagrant ubuntu virtual machine.
 make destroy                        # Destroy vagrant ubuntu virtual machine.
 ```
-
-> To work with vagrant make sure to install `vagrant` and `virtualbox`.
 
 ### Configure VSCode
 
