@@ -29,6 +29,12 @@ up: # Create vagrant ubuntu virtual machine for testing.
 provision: # Provision vagrant ubuntu virtual machine.
 	@vagrant provision
 
+validate: # Check ansible lint and syntax.
+	@ansible-lint
+	@ansible-playbook -i playbooks/inventory.yml playbooks/setup.yml --syntax-check
+	@ansible-playbook -i playbooks/inventory.yml playbooks/basic.yml --syntax-check
+	@ansible-playbook -i playbooks/inventory.yml playbooks/wsl.yml --syntax-check
+
 ssh: # SSH into vagrant ubuntu virtual machine.
 	@vagrant ssh
 
