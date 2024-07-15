@@ -29,12 +29,20 @@
     mode: "0774"
     state: directory
 
+- name: Check if .npm folder exists for user "{{ ansible_user }}"
+  ansible.builtin.stat:
+    path: /home/{{ ansible_user }}/.npm
+  register: npm_on_user_profile
+
+- name: Display if .npm folder exists
+  ansible.builtin.debug:
+    var: npm_on_user_profile.stat.exists
+
 - name: Change npm's default directory
   become: false
   become_user: "{{ ansible_user }}"
   ansible.builtin.command: npm config set prefix ~/.npm
-  register: npm_default_path
-  changed_when: npm_default_path != 0
+  changed_when: not npm_on_user_profile
 
 - name: Append npm path to environment variables
   ansible.builtin.lineinfile:

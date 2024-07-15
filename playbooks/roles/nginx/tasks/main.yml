@@ -13,10 +13,7 @@
   ansible.builtin.file:
     dest: /etc/nginx/sites-enabled/default
     state: absent
+  notify: Restart and enable nginx
 
-- name: Restart and enable nginx
-  become: true
-  ansible.builtin.service:
-    name: nginx
-    state: restarted
-    enabled: true
+- name: Flush Handlers
+  ansible.builtin.meta: flush_handlers

@@ -17,9 +17,5 @@
     group: root
     mode: "0644"
 
-- name: Restart and enable mysql
-  become: true
-  ansible.builtin.service:
-    name: mysql
-    state: restarted
-    enabled: true
+- name: Flush Handlers
+  ansible.builtin.meta: flush_handlers
