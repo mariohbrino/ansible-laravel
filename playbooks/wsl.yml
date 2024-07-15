@@ -1,6 +1,6 @@
 ---
 - name: Provision laravel development
-  hosts: laravel
+  hosts: localhost
   roles:
     - { role: common, tags: common }
     - { role: php, tags: php }
