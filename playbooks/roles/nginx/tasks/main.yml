@@ -1,22 +1,22 @@
 ---
 - name: Install nginx
-  become: yes
-  apt: 
+  become: true
+  ansible.builtin.apt:
     pkg:
       - nginx
-    state: latest
-    force: yes
-    update_cache: yes
+    state: present
+    force: true
+    update_cache: true
 
 - name: Disable default config
-  become: yes
-  file: 
+  become: true
+  ansible.builtin.file:
     dest: /etc/nginx/sites-enabled/default
     state: absent
 
 - name: Restart and enable nginx
-  become: yes
-  service:
+  become: true
+  ansible.builtin.service:
     name: nginx
     state: restarted
-    enabled: yes
+    enabled: true

@@ -1,25 +1,25 @@
 ---
 - name: Install mysql server
-  become: yes
-  apt:
+  become: true
+  ansible.builtin.apt:
     pkg:
       - mysql-server
     state: present
-    force: yes
-    update_cache: yes
+    force: true
+    update_cache: true
 
 - name: Add my.cnf configuration
-  become: yes
-  template:
+  become: true
+  ansible.builtin.template:
     src: files/my.cnf
     dest: /etc/mysql/conf.d
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Restart and enable mysql
-  become: yes
-  service:
+  become: true
+  ansible.builtin.service:
     name: mysql
     state: restarted
-    enabled: yes
+    enabled: true

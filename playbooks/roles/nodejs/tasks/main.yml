@@ -1,40 +1,43 @@
 ---
 - name: Add nodejs apt key
-  become: yes
-  apt_key:
+  become: true
+  ansible.builtin.apt_key:
     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
     keyring: /etc/apt/trusted.gpg.d/nodejs.gpg
     state: present
 
 - name: Add nodejs ppa
-  become: yes
-  apt_repository:
+  become: true
+  ansible.builtin.apt_repository:
     repo: deb https://deb.nodesource.com/node_20.x focal main
-    update_cache: yes
+    update_cache: true
 
 - name: Install nodejs
-  become: yes
-  apt: 
+  become: true
+  ansible.builtin.apt:
     pkg: nodejs
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Create npm's directory
+  become: true
   become_user: "{{ ansible_user }}"
-  become: yes
-  file:
+  ansible.builtin.file:
     path: /home/{{ ansible_user }}/.npm
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
-    mode: 0774
+    mode: "0774"
     state: directory
 
 - name: Change npm's default directory
+  become: false
   become_user: "{{ ansible_user }}"
-  shell: npm config set prefix ~/.npm
+  ansible.builtin.command: npm config set prefix ~/.npm
+  register: npm_default_path
+  changed_when: npm_default_path != 0
 
 - name: Append npm path to environment variables
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /home/{{ ansible_user }}/.profile
     regexp: '^export PATH=~/.npm/bin:$PATH$'
     line: 'export PATH=~/.npm/bin:$PATH'

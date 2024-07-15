@@ -1,23 +1,23 @@
 ---
 - name: Add php ondrej apt repository
-  become: yes
-  apt_repository:
+  become: true
+  ansible.builtin.apt_repository:
     repo: ppa:ondrej/php
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Install php
-  become: yes
-  apt:
+  become: true
+  ansible.builtin.apt:
     pkg:
       php8.2-fpm
     state: present
-    force: yes
-    update_cache: yes
+    force: true
+    update_cache: true
 
 - name: Install php dependencies
-  become: yes
-  apt:
+  become: true
+  ansible.builtin.apt:
     pkg:
       - php8.2
       - php8.2-mysql
@@ -30,5 +30,5 @@
       - php8.2-xmlrpc
       - php8.2-zip
     state: present
-    force: yes
-    update_cache: yes
+    force: true
+    update_cache: true

@@ -1,17 +1,21 @@
 ---
 - name: Check that valet is installed
-  stat:
+  ansible.builtin.stat:
     path: /home/{{ ansible_user }}/.config/composer/vendor/bin/valet
   register: valet_installed
 
 - name: Add valet to global composer
-  become: yes
+  become: true
   become_user: "{{ ansible_user }}"
-  command: /usr/local/bin/composer global require cpriego/valet-linux
-  when: valet_installed.stat.exists == False
+  ansible.builtin.command: /usr/local/bin/composer global require cpriego/valet-linux
+  when: not valet_installed.stat.exists
+  changed_when: valet_installed.stat.exists
 
 - name: Install valet
-  become: yes
+  become: true
   become_user: "{{ ansible_user }}"
-  shell: /home/{{ ansible_user }}/.config/composer/vendor/bin/valet install
-  when: valet_installed.stat.exists == False and ansible_connection == 'local'
+  ansible.builtin.command: /home/{{ ansible_user }}/.config/composer/vendor/bin/valet install
+  when: |
+    not valet_installed.stat.exists
+    and ansible_connection == 'local'
+  changed_when: valet_installed.stat.exists

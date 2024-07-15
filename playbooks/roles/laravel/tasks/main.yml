@@ -1,18 +1,16 @@
 ---
-- name: Check that laravel is installed
-  stat:
-    path: /home/{{ ansible_user }}/.config/composer/vendor/bin/laravel
-  register: laravel_installed
-
 - name: Add laravel to global composer
-  become: no
+  become: false
   become_user: "{{ ansible_user }}"
-  command: /usr/local/bin/composer global require laravel/installer
-  when: laravel_installed.stat.exists == False
+  community.general.composer:
+    command: require
+    global_command: true
+    arguments: laravel/installer
 
 - name: Ensures www directory exists
-  file:
+  ansible.builtin.file:
     path: /home/{{ ansible_user }}/www
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
+    mode: "0650"
     state: directory

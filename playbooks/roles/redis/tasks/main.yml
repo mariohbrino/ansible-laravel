@@ -1,8 +1,8 @@
 ---
 - name: Install redis server
-  become: yes
-  apt: 
+  become: true
+  ansible.builtin.apt:
     pkg:
-      - redis-server 
-    state: present 
-    force: yes
+      - redis-server
+    state: present
+    force: true

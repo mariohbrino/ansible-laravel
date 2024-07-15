@@ -1,10 +1,7 @@
 ---
-- name: Check that yarn is installed
-  stat:
-    path: /home/{{ ansible_user }}/.npm/bin/yarn
-  register: yarn_installed
-
 - name: Install yarn
+  become: false
   become_user: "{{ ansible_user }}"
-  shell: npm install -g yarn
-  when: yarn_installed.stat.exists == False
+  community.general.npm:
+    name: yarn
+    global: true

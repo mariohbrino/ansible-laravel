@@ -5,13 +5,13 @@
     ansible_user: vagrant
     ansible_python_interpreter: /usr/bin/python3.10
   roles:
-    - { role: common,       tags: common      }
-    - { role: php,          tags: php         }
-    - { role: composer,     tags: composer    }
-    - { role: nginx,        tags: nginx       }
-    - { role: nodejs,       tags: nodejs      }
-    - { role: yarn,         tags: yarn        }
-    - { role: mysql,        tags: mysql       }
-    - { role: redis,        tags: redis       }
-    - { role: supervisor,   tags: supervisor  }
-    - { role: laravel,      tags: laravel     }
+    - { role: common, tags: common }
+    - { role: php, tags: php }
+    - { role: composer, tags: composer }
+    - { role: nginx, tags: nginx }
+    - { role: nodejs, tags: nodejs }
+    - { role: yarn, tags: yarn }
+    - { role: mysql, tags: mysql }
+    - { role: redis, tags: redis }
+    - { role: supervisor, tags: supervisor }
+    - { role: laravel, tags: laravel }
