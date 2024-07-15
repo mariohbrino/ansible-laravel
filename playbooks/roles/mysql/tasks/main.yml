@@ -4,6 +4,7 @@
   ansible.builtin.apt:
     pkg:
       - mysql-server
+      - python3-pymysql
     state: present
     force: true
     update_cache: true
@@ -19,3 +20,35 @@
 
 - name: Flush Handlers
   ansible.builtin.meta: flush_handlers
+
+- name: Removes anonymous user account for localhost
+  become: true
+  become_user: root
+  community.mysql.mysql_user:
+    check_implicit_admin: true
+    login_password: 'password'
+    name: ''
+    host: localhost
+    state: absent
+    login_unix_socket: /run/mysqld/mysqld.sock
+
+- name: Removes all anonymous user accounts
+  become: true
+  become_user: root
+  community.mysql.mysql_user:
+    check_implicit_admin: true
+    login_password: 'password'
+    name: ''
+    host_all: true
+    state: absent
+    login_unix_socket: /run/mysqld/mysqld.sock
+
+- name: Remove test database
+  become: true
+  become_user: root
+  community.mysql.mysql_db:
+    check_implicit_admin: true
+    login_password: 'password'
+    db: test
+    state: absent
+    login_unix_socket: /run/mysqld/mysqld.sock
