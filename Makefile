@@ -7,14 +7,14 @@ help: # Show a list of commands available.
 	@grep -E '^[a-zA-Z0-9 -]+:.*#'  Makefile | while read -r l; do printf "\033[1;32m$$(echo $$l | cut -f 1 -d':')\033[00m:$$(echo $$l | cut -f 2- -d'#')\n"; done
 
 basic: # Basic setup of laravel development. [Initial setup and Ubuntu/Debian Based]
-	@ansible-playbook -i playbooks/inventory.yml playbooks/basic.yml --extra-vars ansible_user=$$(id -nu) -K
+	@ansible-playbook playbooks/basic.yml --extra-vars ansible_user=$$(id -nu) -K
 	@gnome-session-quit --no-prompt
 
 wsl: # Setup of laravel development on WSL. [Initial setup and Ubuntu/Debian Based]
-	@ansible-playbook -i playbooks/inventory.yml playbooks/wsl.yml --extra-vars ansible_user=$$(id -nu) -K
+	@ansible-playbook playbooks/wsl.yml --extra-vars ansible_user=$$(id -nu) -K
 
 setup: # Setup of laravel development. [Initial setup and Ubuntu/Debian Based]
-	@ansible-playbook -i playbooks/inventory.yml playbooks/setup.yml --extra-vars ansible_user=$$(id -nu) -K
+	@ansible-playbook playbooks/setup.yml --extra-vars ansible_user=$$(id -nu) -K
 	@gnome-session-quit --no-prompt
 
 settings: # Copy vagrant environment variables template.
@@ -31,9 +31,9 @@ provision: # Provision vagrant ubuntu virtual machine.
 
 validate: # Check ansible lint and syntax.
 	@ansible-lint
-	@ansible-playbook -i playbooks/inventory.yml playbooks/setup.yml --syntax-check
-	@ansible-playbook -i playbooks/inventory.yml playbooks/basic.yml --syntax-check
-	@ansible-playbook -i playbooks/inventory.yml playbooks/wsl.yml --syntax-check
+	@ansible-playbook playbooks/setup.yml --syntax-check
+	@ansible-playbook playbooks/basic.yml --syntax-check
+	@ansible-playbook playbooks/wsl.yml --syntax-check
 
 ssh: # SSH into vagrant ubuntu virtual machine.
 	@vagrant ssh

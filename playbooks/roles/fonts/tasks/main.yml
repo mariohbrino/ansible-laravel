@@ -11,8 +11,8 @@
 - name: Copy fonts to system
   become: true
   ansible.builtin.copy:
-    src: "files/{{ item }}"
-    dest: "/home/{{ ansible_user }}/.fonts/"
+    src: files/{{ item }}
+    dest: /home/{{ ansible_user }}/.fonts/
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: "0664"

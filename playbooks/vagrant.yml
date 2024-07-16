@@ -4,6 +4,7 @@
   vars:
     ansible_user: vagrant
     ansible_python_interpreter: /usr/bin/python3.10
+    php_version: 8.1
   roles:
     - { role: common, tags: common }
     - { role: php, tags: php }
@@ -15,3 +16,4 @@
     - { role: redis, tags: redis }
     - { role: supervisor, tags: supervisor }
     - { role: laravel, tags: laravel }
+    - { role: valet, tags: valet }

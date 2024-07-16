@@ -1,6 +1,10 @@
 ---
 - name: Provision laravel development
   hosts: localhost
+  vars:
+    ansible_user: ubuntu
+    ansible_python_interpreter: /usr/bin/python3.10
+    php_version: "8.1"
   roles:
     - { role: common, tags: common }
     - { role: fonts, tags: fonts }

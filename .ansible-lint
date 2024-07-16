@@ -1,4 +1,3 @@
 # .ansible-lint
 exclude_paths:
   - .vagrant
-  - playbooks/inventory.yml
