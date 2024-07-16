@@ -4,10 +4,10 @@
   vars:
     ansible_user: ubuntu
     ansible_python_interpreter: /usr/bin/python3.10
-    php_version: "8.1"
+    php_version: 8.1
   roles:
     - { role: common, tags: common }
-    - { role: fonts, tags: fonts }
+    # - { role: fonts, tags: fonts } # TODO: resolve issue with zsh
     - { role: php, tags: php }
     - { role: composer, tags: composer }
     - { role: nginx, tags: nginx }
@@ -18,7 +18,7 @@
     - { role: supervisor, tags: supervisor }
     - { role: sublime, tags: sublime }
     - { role: vscode, tags: vscode }
-    - { role: zsh, tags: zsh }
-    - { role: terminal, tags: terminal }
+    # - { role: zsh, tags: zsh } # TODO: resolve issue with zsh
+    # - { role: terminal, tags: terminal } # TODO: resolve issue with zsh
     - { role: laravel, tags: laravel }
     - { role: valet, tags: valet }
