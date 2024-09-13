@@ -6,19 +6,12 @@ help: # Show a list of commands available.
 	@echo "Commands:\n"
 	@grep -E '^[a-zA-Z0-9 -]+:.*#'  Makefile | while read -r l; do printf "\033[1;32m$$(echo $$l | cut -f 1 -d':')\033[00m:$$(echo $$l | cut -f 2- -d'#')\n"; done
 
-basic: # Basic setup of laravel development. [Initial setup and Ubuntu/Debian Based]
-	@ansible-playbook playbooks/basic.yml --extra-vars ansible_user=$$(id -nu) -K
-	@gnome-session-quit --no-prompt
-
-wsl: # Setup of laravel development on WSL. [Initial setup and Ubuntu/Debian Based]
-	@ansible-playbook playbooks/wsl.yml --extra-vars ansible_user=$$(id -nu) -K
-
 setup: # Setup of laravel development. [Initial setup and Ubuntu/Debian Based]
 	@ansible-playbook playbooks/setup.yml --extra-vars ansible_user=$$(id -nu) -K
 	@gnome-session-quit --no-prompt
 
-settings: # Copy vagrant environment variables template.
-	@cp .env.example .env
+copy: # Copy vagrant environment variables template.
+	@cp servers.json.example servers.json
 
 install: # Install vagrant plugins.
 	@vagrant plugin install vagrant-env

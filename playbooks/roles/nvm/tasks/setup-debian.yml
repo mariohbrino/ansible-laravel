@@ -1,0 +1,31 @@
+---
+- name: Check that hasura is installed
+  ansible.builtin.stat:
+    path: /home/{{ ansible_user }}/.nvm
+  register: nvm_installed
+
+- name: Download NVM installation script
+  become: false
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh
+    dest: /tmp/nvm.sh
+    mode: +x
+  when: not nvm_installed.stat.exists
+  register: nvm_installer_script_download
+
+- name: Run the nvm installer script
+  become: false
+  become_user: "{{ ansible_user }}"
+  ansible.builtin.shell: /tmp/nvm.sh
+  args:
+    executable: /usr/bin/bash
+    chdir: $HOME
+    creates: $HOME/.nvm/nvm.sh
+  when: not nvm_installed.stat.exists
+  changed_when: nvm_installed.stat.exists
+
+- name: Remove the nvm install script
+  ansible.builtin.file:
+    path: /tmp/nvm.sh
+    state: absent
+  when: not nvm_installed.stat.exists

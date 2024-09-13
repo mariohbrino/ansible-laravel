@@ -1,0 +1,8 @@
+---
+- name: Install supervisor
+  become: true
+  ansible.builtin.apt:
+    pkg:
+      - supervisor
+    state: present
+    force: true

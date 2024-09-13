@@ -1,21 +1,6 @@
 ---
-- name: Install key for visual studio code
-  become: true
-  ansible.builtin.apt_key:
-    url: https://packages.microsoft.com/keys/microsoft.asc
-    keyring: /etc/apt/trusted.gpg.d/vscode-microsoft.gpg
-    state: present
-
-- name: Add visual studio code repo
-  become: true
-  ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
-    update_cache: true
-
-- name: Install visual studio code
-  become: true
-  ansible.builtin.apt:
-    pkg:
-      - code
-    state: present
-    force: true
+- name: Configure Debian Environment
+  ansible.builtin.include_tasks: setup-debian.yml
+  when: ansible_os_family == 'Debian'
+    and 'microsoft' not in ansible_kernel | lower
+    and 'wsl' not in ansible_kernel | lower

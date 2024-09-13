@@ -1,0 +1,16 @@
+---
+- name: Add laravel to global composer
+  become: false
+  become_user: "{{ ansible_user }}"
+  community.general.composer:
+    command: require
+    global_command: true
+    arguments: laravel/installer
+
+- name: Ensures www directory exists
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/www
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0650"
+    state: directory

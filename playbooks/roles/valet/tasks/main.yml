@@ -1,22 +1,6 @@
 ---
-- name: Add valet to global composer
-  become: false
-  become_user: "{{ ansible_user }}"
-  community.general.composer:
-    command: require
-    global_command: true
-    arguments: cpriego/valet-linux
-  register: valet_installed
-
-- name: Display if valet is installed
-  ansible.builtin.debug:
-    var: valet_installed.changed
-
-- name: Install valet
-  become: true
-  become_user: "{{ ansible_user }}"
-  ansible.builtin.command: /home/{{ ansible_user }}/.config/composer/vendor/bin/valet install
-  when: |
-    valet_installed.changed
-    and (ansible_connection == 'local' or inventory_hostname == 'laravel')
-  changed_when: valet_installed.changed
+- name: Configure Debian Environment
+  ansible.builtin.include_tasks: setup-debian.yml
+  when: ansible_os_family == 'Debian'
+    and 'microsoft' not in ansible_kernel | lower
+    and 'wsl' not in ansible_kernel | lower

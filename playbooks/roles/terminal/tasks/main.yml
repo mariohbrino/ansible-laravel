@@ -1,20 +1,4 @@
 ---
-- name: Copy backup of terminal settings
-  ansible.builtin.copy:
-    src: files/gnome_terminal_settings_backup.txt
-    dest: /tmp/gnome_terminal_settings_backup.txt
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: "0644"
-
-- name: Recovery backup of terminal settings
-  become: true
-  become_user: "{{ ansible_user }}"
-  ansible.builtin.command: dconf load /org/gnome/terminal/ < /tmp/gnome_terminal_settings_backup.txt
-  register: restore_terminal
-  changed_when: restore_terminal != 0
-
-- name: Remove backup of terminal settings
-  ansible.builtin.file:
-    dest: /tmp/gnome_terminal_settings_backup.txt
-    state: absent
+- name: Configure Debian Environment
+  ansible.builtin.include_tasks: setup-debian.yml
+  when: ansible_os_family == 'Debian'

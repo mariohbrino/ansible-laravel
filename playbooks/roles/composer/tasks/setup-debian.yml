@@ -1,0 +1,30 @@
+---
+- name: Check that composer is installed
+  ansible.builtin.stat:
+    path: /usr/local/bin/composer
+  register: composer_installed
+
+- name: Download composer
+  ansible.builtin.get_url:
+    url: "{{ composer_url }}"
+    checksum: sha256:{{ composer_url }}.sha256sum
+    dest: /tmp/composer.phar
+    mode: "0755"
+  when: not composer_installed.stat.exists
+  changed_when: composer_installed.stat.exists
+
+- name: Install composer
+  become: true
+  ansible.builtin.command: mv /tmp/composer.phar /usr/local/bin/composer
+  when: not composer_installed.stat.exists
+  changed_when: composer_installed.stat.exists
+
+- name: Replace .profile file
+  ansible.builtin.copy:
+    src: files/.profile
+    dest: /home/{{ ansible_user }}/.profile
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"
+  when: not composer_installed.stat.exists
+  changed_when: composer_installed.stat.exists

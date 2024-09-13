@@ -1,25 +1,30 @@
+require "json"
 
 Vagrant.configure("2") do |config|
-  config.vm.define "laravel" do |node|
-    config.env.enable
-    node.vm.box = ENV["BOX"]
-    node.vm.hostname = ENV["HOSTNAME"]
 
-    node.vm.network ENV["NETWORK"],
-      ip: ENV["IP_ADDRESS"],
-      bridge: ENV["BRIDGE"],
-      gateway: ENV["GATEWAY"],
-      netmask: ENV["NETMASK"]
+  servers = JSON.parse(File.read("servers.json"))
 
-    node.vm.provider "virtualbox" do |vm|
-      vm.cpus = ENV["CPUS"]
-      vm.memory = ENV["MEMORY"]
-      vm.name = ENV["NAME"]
-    end
+  servers.each do |machine|
+    config.vm.define machine["name"] do |node|
+      node.vm.box = machine["box"]
+      node.vm.hostname = machine["hostname"]
 
-    node.vm.provision "ansible" do |ansible|
-      ansible.playbook = ENV["PLAYBOOK"]
-      ansible.compatibility_mode = "1.8"
+      node.vm.network machine["network"],
+        ip: machine["ip"],
+        bridge: machine["bridge"],
+        gateway: machine["gateway"],
+        netmask: machine["netmask"]
+
+      node.vm.provider "virtualbox" do |vm|
+        vm.cpus = machine["cpu"]
+        vm.memory = machine["memory"]
+        vm.name = machine["name"]
+      end
+
+      node.vm.provision "ansible" do |ansible|
+        ansible.playbook = machine["provision"]
+        ansible.compatibility_mode = "1.8"
+      end
     end
   end
 end
