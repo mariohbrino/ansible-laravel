@@ -1,0 +1,59 @@
+---
+- name: Install zsh and dependencies
+  ansible.builtin.apt:
+    pkg:
+      - zsh
+      - powerline
+      - fonts-powerline
+    state: present
+    force: true
+
+- name: Check that .oh-my-zsh is installed
+  ansible.builtin.stat:
+    path: /home/{{ ansible_user }}/.oh-my-zsh
+  register: ohmyzsh_installed
+
+- name: Download zsh shell
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/zsh-installer.sh
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0650"
+  when: not ohmyzsh_installed.stat.exists
+  changed_when: ohmyzsh_installed.stat.exists
+
+- name: Install zsh shell
+  become: true
+  become_user: "{{ ansible_user }}"
+  ansible.builtin.command: sh /tmp/zsh-installer.sh
+  when: not ohmyzsh_installed.stat.exists
+  changed_when: ohmyzsh_installed.stat.exists
+
+- name: Remove zsh-installer.sh
+  become: true
+  become_user: "{{ ansible_user }}"
+  ansible.builtin.file:
+    path: /tmp/zsh-installer.sh
+    state: absent
+  when: not ohmyzsh_installed.stat.exists
+  changed_when: ohmyzsh_installed.stat.exists
+
+- name: Change shell to zsh
+  ansible.builtin.command: "chsh -s /usr/bin/zsh {{ ansible_user }}"
+  register: change_to_zsh
+  changed_when: change_to_zsh != 0
+
+- name: Download Powerlevel10k Theme
+  ansible.builtin.git:
+    depth: 1
+    repo: https://github.com/romkatv/powerlevel10k.git # noqa: latest
+    dest: /home/{{ ansible_user }}/.oh-my-zsh/custom/themes/powerlevel10k
+
+- name: Replace .zshrc file
+  ansible.builtin.copy:
+    src: files/.zshrc
+    dest: /home/{{ ansible_user }}
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"

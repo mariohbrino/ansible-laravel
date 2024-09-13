@@ -11,7 +11,7 @@ sudo apt -y install ansible make
 
 Then run the make command to set up the machine.
 ```bash
-make [setup | basic | wsl]          # Provision laravel development environemnt.
+make setup                          # Provision laravel development environemnt.
 ```
 
 ### Vagrant settings
@@ -23,7 +23,7 @@ sudo apt -y install vagrant virtualbox
 
 To configure a ubuntu virtual machine with vagrant use the commands below.
 ```bash
-make settings                       # Copy vagrant environment variables template.
+make copy                           # Copy vagrant environment variables template.
 make install                        # Install vagrant plugins.
 make up                             # Create vagrant ubuntu virtual machine for testing.
 make provision                      # Provision vagrant ubuntu virtual machine.

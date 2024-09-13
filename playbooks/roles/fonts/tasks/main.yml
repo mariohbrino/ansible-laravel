@@ -1,23 +1,4 @@
 ---
-- name: Create fonts direcitoy
-  become: true
-  ansible.builtin.file:
-    path: /home/{{ ansible_user }}/.fonts/
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: "0774"
-    state: directory
-
-- name: Copy fonts to system
-  become: true
-  ansible.builtin.copy:
-    src: files/{{ item }}
-    dest: /home/{{ ansible_user }}/.fonts/
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: "0664"
-  loop:
-    - "MesloLGS NF Regular.ttf"
-    - "MesloLGS NF Bold.ttf"
-    - "MesloLGS NF Italic.ttf"
-    - "MesloLGS NF Bold Italic.ttf"
+- name: Configure Debian Environment
+  ansible.builtin.include_tasks: setup-debian.yml
+  when: ansible_os_family == 'Debian'

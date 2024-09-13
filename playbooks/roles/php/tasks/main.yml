@@ -1,34 +1,4 @@
 ---
-- name: Add php ondrej apt repository
-  become: true
-  ansible.builtin.apt_repository:
-    repo: ppa:ondrej/php
-    state: present
-    update_cache: true
-
-- name: Install php
-  become: true
-  ansible.builtin.apt:
-    pkg:
-      php{{ php_version }}-fpm
-    state: present
-    force: true
-    update_cache: true
-
-- name: Install php dependencies
-  become: true
-  ansible.builtin.apt:
-    pkg:
-      - php{{ php_version }}
-      - php{{ php_version }}-mysql
-      - php{{ php_version }}-curl
-      - php{{ php_version }}-gd
-      - php{{ php_version }}-intl
-      - php{{ php_version }}-mbstring
-      - php{{ php_version }}-soap
-      - php{{ php_version }}-xml
-      - php{{ php_version }}-xmlrpc
-      - php{{ php_version }}-zip
-    state: present
-    force: true
-    update_cache: true
+- name: Configure Debian Environment
+  ansible.builtin.include_tasks: setup-debian.yml
+  when: ansible_os_family == 'Debian'

@@ -4,16 +4,17 @@
   vars:
     ansible_user: vagrant
     ansible_python_interpreter: /usr/bin/python3.10
-    php_version: 8.1
+    php_version: 8.2
+    npm_version: 20.12.2
   roles:
     - { role: common, tags: common }
     - { role: php, tags: php }
     - { role: composer, tags: composer }
     - { role: nginx, tags: nginx }
-    - { role: nodejs, tags: nodejs }
-    - { role: yarn, tags: yarn }
+    - { role: nvm, tags: nvm }
+    - { role: npm, tags: npm }
     - { role: mysql, tags: mysql }
     - { role: redis, tags: redis }
     - { role: supervisor, tags: supervisor }
-    - { role: laravel, tags: laravel }
     - { role: valet, tags: valet }
+    - { role: laravel, tags: laravel }

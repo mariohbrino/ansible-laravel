@@ -1,5 +1,5 @@
 .code
 .DS_Store
-.env
 .idea
 .vagrant
+servers.json

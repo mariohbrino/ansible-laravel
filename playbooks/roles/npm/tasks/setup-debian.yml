@@ -1,0 +1,15 @@
+---
+- name: Install Node.js version using NVM
+  become: false
+  become_user: "{{ ansible_user }}"
+  ansible.builtin.shell: >
+    export NVM_DIR="$HOME/.nvm" &&
+    [ -s "$NVM_DIR/nvm.sh" ] &&
+    \. "$NVM_DIR/nvm.sh" &&
+    nvm install {{ npm_version }}
+  args:
+    executable: /usr/bin/bash
+    chdir: $HOME
+    creates: $HOME/.nvm/versions/{{ npm_version }}"
+  when: not nvm_installed.stat.exists
+  changed_when: nvm_installed.stat.exists
