@@ -4,6 +4,10 @@
     path: /usr/local/bin/composer
   register: composer_installed
 
+- name: Display if composer is installed
+  ansible.builtin.debug:
+    var: composer_installed.stat.exists
+
 - name: Download composer
   ansible.builtin.get_url:
     url: "{{ composer_url }}"
@@ -11,13 +15,13 @@
     dest: /tmp/composer.phar
     mode: "0755"
   when: not composer_installed.stat.exists
-  changed_when: composer_installed.stat.exists
+  changed_when: not composer_installed.stat.exists
 
 - name: Install composer
   become: true
   ansible.builtin.command: mv /tmp/composer.phar /usr/local/bin/composer
   when: not composer_installed.stat.exists
-  changed_when: composer_installed.stat.exists
+  changed_when: not composer_installed.stat.exists
 
 - name: Replace .profile file
   ansible.builtin.copy:
@@ -27,4 +31,4 @@
     group: "{{ ansible_user }}"
     mode: "0644"
   when: not composer_installed.stat.exists
-  changed_when: composer_installed.stat.exists
+  changed_when: not composer_installed.stat.exists

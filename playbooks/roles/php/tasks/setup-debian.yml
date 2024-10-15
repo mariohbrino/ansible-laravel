@@ -1,9 +1,15 @@
 ---
-- name: Add php ondrej apt repository
+- name: Install key for php ondrej
+  become: true
+  ansible.builtin.apt_key:
+    url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x14aa40ec0831756756d7f66c4f4ea0aae5267a6c
+    keyring: /etc/apt/trusted.gpg.d/ppa_ondrej_php.gpg
+    state: present
+
+- name: Add php ondrej repo
   become: true
   ansible.builtin.apt_repository:
-    repo: ppa:ondrej/php
-    state: present
+    repo: deb https://ppa.launchpadcontent.net/ondrej/php/ubuntu jammy main
     update_cache: true
 
 - name: Install php
@@ -19,16 +25,23 @@
   become: true
   ansible.builtin.apt:
     pkg:
-      - php{{ php_version }}
-      - php{{ php_version }}-mysql
-      - php{{ php_version }}-curl
-      - php{{ php_version }}-gd
-      - php{{ php_version }}-intl
-      - php{{ php_version }}-mbstring
-      - php{{ php_version }}-soap
-      - php{{ php_version }}-xml
-      - php{{ php_version }}-xmlrpc
-      - php{{ php_version }}-zip
+      "{{ item }}"
     state: present
     force: true
     update_cache: true
+  with_items:
+    - php{{ php_version }}
+    - php{{ php_version }}-mysql
+    - php{{ php_version }}-pgsql
+    - php{{ php_version }}-sqlite3
+    - php{{ php_version }}-redis
+    - php{{ php_version }}-curl
+    - php{{ php_version }}-gd
+    - php{{ php_version }}-intl
+    - php{{ php_version }}-mbstring
+    - php{{ php_version }}-soap
+    - php{{ php_version }}-swoole
+    - php{{ php_version }}-xdebug
+    - php{{ php_version }}-xml
+    - php{{ php_version }}-xmlrpc
+    - php{{ php_version }}-zip

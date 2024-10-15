@@ -3,16 +3,18 @@
   become: true
   ansible.builtin.apt:
     pkg:
-      - git
-      - curl
-      - wget
-      - zip
-      - unzip
-      - net-tools
-      - network-manager
-      - libnss3-tools
-      - jq
-      - xsel
+      "{{ item }}"
     state: present
     force: true
     update_cache: true
+  with_items:
+    - git
+    - curl
+    - wget
+    - zip
+    - unzip
+    - net-tools
+    - network-manager
+    - libnss3-tools
+    - jq
+    - xsel

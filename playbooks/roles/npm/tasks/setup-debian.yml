@@ -12,4 +12,4 @@
     chdir: $HOME
     creates: $HOME/.nvm/versions/{{ npm_version }}"
   when: not nvm_installed.stat.exists
-  changed_when: nvm_installed.stat.exists
+  changed_when: not nvm_installed.stat.exists

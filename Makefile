@@ -25,8 +25,6 @@ provision: # Provision vagrant ubuntu virtual machine.
 validate: # Check ansible lint and syntax.
 	@ansible-lint
 	@ansible-playbook playbooks/setup.yml --syntax-check
-	@ansible-playbook playbooks/basic.yml --syntax-check
-	@ansible-playbook playbooks/wsl.yml --syntax-check
 
 ssh: # SSH into vagrant ubuntu virtual machine.
 	@vagrant ssh

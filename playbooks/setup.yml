@@ -4,7 +4,7 @@
   vars:
     ansible_user: ubuntu
     ansible_python_interpreter: /usr/bin/python3.10
-    php_version: 8.2
+    php_version: 8.3
     npm_version: 20.12.2
   roles:
     - { role: common, tags: common }

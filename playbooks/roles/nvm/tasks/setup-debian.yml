@@ -1,8 +1,12 @@
 ---
-- name: Check that hasura is installed
+- name: Check that nvm is installed
   ansible.builtin.stat:
     path: /home/{{ ansible_user }}/.nvm
   register: nvm_installed
+
+- name: Display if nvm is installed
+  ansible.builtin.debug:
+    var: nvm_installed.stat.exists
 
 - name: Download NVM installation script
   become: false
@@ -22,7 +26,7 @@
     chdir: $HOME
     creates: $HOME/.nvm/nvm.sh
   when: not nvm_installed.stat.exists
-  changed_when: nvm_installed.stat.exists
+  changed_when: not nvm_installed.stat.exists
 
 - name: Remove the nvm install script
   ansible.builtin.file:
