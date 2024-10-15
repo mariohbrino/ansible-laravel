@@ -1,0 +1,62 @@
+---
+- name: Add postgres apt key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    keyring: /etc/apt/trusted.gpg.d/postgresql.gpg
+    state: present
+
+- name: Add postgres repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt jammy-pgdg main
+    update_cache: true
+
+- name: Install postgresql server
+  become: true
+  ansible.builtin.apt:
+    pkg:
+      "{{ item }}"
+    state: present
+    force: true
+    update_cache: true
+  with_items:
+    - postgresql-{{ postgresql_version }}
+    - python3-psycopg2
+
+- name: Modify pg_hba.conf to use md5 authentication for all local connections
+  become: true
+  ansible.builtin.blockinfile:
+    path: "/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf"
+    block: |
+      # Ansible managed: Set md5 authentication for local connections
+      local   all             all                                     md5
+      host    all             all             127.0.0.1/32            md5
+      host    all             all             ::1/128                 md5
+  notify: Restart and enable postgresql
+
+- name: Flush Handlers
+  ansible.builtin.meta: flush_handlers
+
+# - name: Create postgres database
+#   community.general.postgresql_db:
+#     name: "{{ item }}"
+#     state: present
+#   with_items:
+#     - "{{ db_name }}"
+
+# - name: Create postgres user
+#   community.general.postgresql_user:
+#     name: "{{ item }}"
+#     password: password
+#   with_items:
+#     - "{{ db_user }}"
+
+# - name: Ensure we have access for the new user
+#   community.general.postgresql_privs:
+#     db: "{{ item }}"
+#     role: "{{ db_user }}"
+#     objs: ALL_IN_SCHEMA
+#     privs: ALL
+#   with_items:
+#     - "{{ db_name }}"
