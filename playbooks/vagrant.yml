@@ -6,6 +6,9 @@
     ansible_python_interpreter: /usr/bin/python3.10
     php_version: 8.3
     npm_version: 20.12.2
+    db_user: laravel
+    db_name: laravel
+    db_password: password
   roles:
     - { role: common, tags: common }
     - { role: php, tags: php }
